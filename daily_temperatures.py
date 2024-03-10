@@ -1,5 +1,4 @@
-# Brute Force
-
+# TODO: Do this problem!
 def daily_temperatures(temps):
     pass
 
