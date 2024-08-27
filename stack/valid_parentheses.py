@@ -1,24 +1,16 @@
 def is_valid(s):
-    parentheses_stack = []
-    for i in s:
+    stack = []
+    paranthesis_mapping = {')': '(', ']': '[', '}': '{'}
 
-        # If the next character is an opening bracket
-        if i in '({[':
-            parentheses_stack.append(i)
-
-        # If it's a closing bracket
+    for bracket in s:
+        if bracket in paranthesis_mapping.values():
+            stack.append(bracket)
         else:
-
-            # If it doesn't match, return False
-            if not parentheses_stack or \
-                    i == ')' and parentheses_stack[-1] != '(' or \
-                    i == '}' and parentheses_stack[-1] != '{' or \
-                    i == ']' and parentheses_stack[-1] != '[':
+            if not stack or stack[-1] != paranthesis_mapping[bracket]:
                 return False
-            parentheses_stack.pop()
+            stack.pop()
 
-    # If stack is empty return True
-    return not parentheses_stack
+    return not stack
 
 
-print(is_valid('}'))
+print(is_valid('()[]{}'))
