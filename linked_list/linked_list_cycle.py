@@ -6,11 +6,9 @@ class LinkedList:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         slow, fast = head, head
 
-        # Keep iterating and praying that they come to each other
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-
             if slow == fast:
                 return True
 
