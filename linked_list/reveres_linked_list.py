@@ -5,7 +5,8 @@ class ListNode:
 
 
 def reverseList(head: ListNode) -> ListNode:
-    prev, current = None, head
+    prev = None
+    current = head
 
     while current:
         temp = current.next
@@ -13,7 +14,8 @@ def reverseList(head: ListNode) -> ListNode:
         prev = current
         current = temp
 
-    return
+    return prev
+
 
 
 def create_linked_list(elements):
