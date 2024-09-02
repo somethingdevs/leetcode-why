@@ -1,15 +1,8 @@
+from utils import ListNode, build_linked_list, print_linked_list
 from typing import Optional
-
-
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-
 
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        # p, q = list1, list2
         dummy = ListNode()
         current = dummy
 
@@ -22,40 +15,30 @@ class Solution:
                 list2 = list2.next
             current = current.next
 
-        # Attach the remaining elements
-        current.next = list1 if list1 else list2
+        if list1:
+            current.next = list1
+
+        elif list2:
+            current.next = list2
 
         return dummy.next
 
-
-def create_linked_list(values):
-    """ Helper function to create a linked list from a list of values. """
-    if not values:
-        return None
-    head = ListNode(values[0])
-    current = head
-    for value in values[1:]:
-        current.next = ListNode(value)
-        current = current.next
-    return head
-
-
-def print_linked_list(head):
-    """ Helper function to print the linked list. """
-    while head:
-        print(head.val, end=' -> ' if head.next else '')
-        head = head.next
-    print()
-
-
 # Example usage
-if __name__ == "__main__":
-    # Create a linked list with the binary representation [1,0,1,1]
-    ll = create_linked_list([1, 0, 1, 1])
-    # print("Linked List: ")
-    # print_linked_list(ll)
+values1 = [1, 2, 4]
+values2 = [1, 3, 4]
 
-    # Solve the problem
-    solution = Solution()
-    result = solution.getDecimalValue(ll)
-    print("Decimal Value:", result)
+l1 = build_linked_list(values1)
+l2 = build_linked_list(values2)
+
+print("First Linked List:")
+print_linked_list(l1)
+
+print("Second Linked List:")
+print_linked_list(l2)
+
+# Create an instance of Solution and call mergeTwoLists
+solution = Solution()
+result = solution.mergeTwoLists(l1, l2)
+
+print("Merged Linked List:")
+print_linked_list(result)
