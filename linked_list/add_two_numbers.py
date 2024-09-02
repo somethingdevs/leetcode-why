@@ -4,28 +4,26 @@ from typing import Optional
 
 class LinkedList:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        # Initialize everything
         first, second = l1, l2
         dummy = ListNode(0)
         result = dummy
         carry = 0
 
-        # Loop until both lists are exhausted and no carry remains
         while first or second or carry:
             val1 = first.val if first else 0
             val2 = second.val if second else 0
 
-            # Sum the values and the carry
-            total = val1 + val2 + carry
-            carry = total // 10  # Get new carry
+            # ADDING
+            total = (val1 + val2 + carry) % 10
+            carry = (val1 + val2 + carry) // 10
 
-            # Create a new node with the sum mod 10
-            result.next = ListNode(total % 10)
+            result.next = ListNode(total)
             result = result.next
 
-            # Move pointers if possible
+            # INCREMENT
             if first:
                 first = first.next
+
             if second:
                 second = second.next
 
