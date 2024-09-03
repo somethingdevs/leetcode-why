@@ -6,24 +6,39 @@ class Node:
 
 
 def copyRandomList(head: 'Optional[Node]') -> 'Optional[Node]':
-    old_hash_map = {None: None}
+    # If no values
+    if head == None:
+        return None
 
-    # First pass where you just create copy of the node and set the node to the hash map
+    # First run, creating nodes in between the existing values
     current = head
     while current:
-        copy = Node(current.val)
-        old_hash_map[current] = copy
-        current = current.next
+        new_node = Node(current.val)
+        new_node.next = current.next
+        current.next = new_node
+        current = new_node.next
 
-    # Second pass where you take those copies of the nodes in the hashmap and point them correctly
+    # Second run, assigning randoms of the nodes
     current = head
     while current:
-        copy = old_hash_map[current]
-        copy.next = old_hash_map[current.next]
-        copy.random = old_hash_map[current.random]
-        current = current.next
+        if current.random:
+            current.next.random = current.random.next
+        else:
+            current.next.random = None
+        current = current.next.next
 
-    return old_hash_map[head]
+    # Third run, seperating the old and new connections
+    current = head
+    new_head = head.next
+    new_current = new_head
+    while current:
+        current.next = new_current.next
+        current = current.next
+        if current:
+            new_current.next = current.next
+        new_current = new_current.next
+
+    return new_head
 
 
 def print_list(node: 'Optional[Node]'):
