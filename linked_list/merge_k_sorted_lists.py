@@ -3,6 +3,8 @@ from typing import List, Optional
 
 
 class Solution:
+
+    # Helper function to merge two lists
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         dummy = ListNode()
         current = dummy
@@ -16,26 +18,30 @@ class Solution:
                 list2 = list2.next
             current = current.next
 
-        # Attach the remaining elements
-        current.next = list1 if list1 else list2
+        if list1:
+            current.next = list1
+        else:
+            current.next = list2
 
         return dummy.next
 
     # not entirely sure whats happening
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+
         if not lists or len(lists) == 0:
             return None
 
         while len(lists) > 1:
-            merged_list = []
+            merged_lists = []
 
             for i in range(0, len(lists), 2):
                 l1 = lists[i]
                 l2 = lists[i + 1] if (i + 1) < len(lists) else None
-                merged_list.append(merged_list(l1, l2))
-            lists = merged_list
+                merged_lists.append(self.mergeTwoLists(l1, l2))
 
-        return lists[0]
+            lists = merged_lists
+
+        return lists[0] if lists else None
 
 
 # Example usage
