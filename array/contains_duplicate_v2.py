@@ -18,7 +18,7 @@ def containsDuplicate(nums: List[int]) -> bool:
         seen[value] = True
     return False
 
-# Using set, O(n)
+# Using set, O(n) - basically checking if the set already contains the value which means that it was entered; therefore the
 def containsDuplicate(nums: List[int]) -> bool:
     seen = set()
     for index, value in enumerate(nums):
