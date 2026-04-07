@@ -1,18 +1,31 @@
 from typing import List
+from mypy.nodes import defaultdict
 
 
+
+
+# Optimal solution
 def groupAnagrams(strs: List[str]) -> List[List[str]]:
-    hash_map = {}
+    result = defaultdict(list)
+    for word  in strs:
+        count = [0] * 26
 
-    for i, n in enumerate(strs):
-        temp = ''.join(sorted(n))
+        for ch in word:
+            count[ord(ch) - ord("a")] += 1
 
-        if temp not in hash_map:
-            hash_map[temp] = []
-        hash_map[temp].append(n)
-
-    return list(hash_map.values())
+        result[tuple(count)].append(word)
+    return list(result.values())
 
 
 strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 print(groupAnagrams(strs))
+
+# Brute-force solution
+# result = {}
+# for value in strs:
+#     base_word = "".join(sorted(value))
+#     if base_word not in result:
+#         result[base_word] = []
+#     result[base_word].append(value)
+#
+# return list(result.values())
