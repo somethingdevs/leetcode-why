@@ -3,21 +3,21 @@ from collections import defaultdict
 
 
 def topKFrequent(nums: List[int], k: int) -> List[int]:
-    count = {}
-    freq = [[] for i in range(len(nums) + 1)]
+    freq = defaultdict(int)
 
-    for n in nums:
-        count[n] = 1 + count.get(n, 0)
+    # Step 1: Build frequency map
+    for num in nums:
+        freq[num] += 1
 
-    for n, c in count.items():
-        freq[c].append(n)
+    # Step 2: Sort by frequency (descending)
+    sorted_items = sorted(freq.items(), key=lambda x: x[1], reverse=True)
 
-    res = []
-    for i in range(len(freq) - 1, 0, -1):
-        for n in freq[i]:
-            res.append(n)
-            if len(res) == k:
-                return res
+    # Step 3: Extract top k elements
+    result = []
+    for i in range(k):
+        result.append(sorted_items[i][0])
+
+    return result
 
 
 nums = [10, 10, 10, 20, 20, 30]
