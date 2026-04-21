@@ -27,5 +27,5 @@ print(groupAnagrams(strs))
 #     if base_word not in result:
 #         result[base_word] = []
 #     result[base_word].append(value)
-#
 # return list(result.values())
+
