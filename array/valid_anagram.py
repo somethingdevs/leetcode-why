@@ -6,8 +6,8 @@ def isAnagram(s: str, t: str) -> bool:
     count_s, count_t = {}, {}
 
     for index, value in enumerate(s):
-        count_s[value] = 1 + count_s.get(value, 0)
-        count_t[t[index]] = 1 + count_t.get(t[index], 0)
+        count_s[value] = 1 + count_s.get(value, 0)  # increase count for each value in the string S
+        count_t[t[index]] = 1 + count_t.get(t[index], 0)    # increase count for each value in the string t
 
     for c in count_s:
         if count_s[c] != count_t.get(c, 0):
