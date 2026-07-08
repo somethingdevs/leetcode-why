@@ -7,7 +7,8 @@ from mypy.nodes import defaultdict
 # Optimal solution
 def groupAnagrams(strs: List[str]) -> List[List[str]]:
     result = defaultdict(list)
-    for word  in strs:
+
+    for word in strs:
         count = [0] * 26
 
         for ch in word:
@@ -15,7 +16,6 @@ def groupAnagrams(strs: List[str]) -> List[List[str]]:
 
         result[tuple(count)].append(word)
     return list(result.values())
-
 
 strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 print(groupAnagrams(strs))
